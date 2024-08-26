@@ -1,7 +1,7 @@
 {
   "name": "velocity",
   "version": "0.1.0",
-  "description": "High speed full stack web framework",
+  "description": "Rapid development full stack web framework",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -14,10 +14,10 @@
     "url": "https://github.com/rbwsam/velocity/issues"
   },
   "homepage": "https://github.com/rbwsam/velocity#readme",
-  "dependencies": {
-    "koa": "^2.15.3"
-  },
   "devDependencies": {
     "prettier": "^3.3.3"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
   }
 }
