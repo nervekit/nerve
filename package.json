@@ -1,0 +1,23 @@
+{
+  "name": "velocity",
+  "version": "0.1.0",
+  "description": "High speed full stack web framework",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "github:rbwsam/velocity",
+  "author": "Sam Leavens",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rbwsam/velocity/issues"
+  },
+  "homepage": "https://github.com/rbwsam/velocity#readme",
+  "dependencies": {
+    "koa": "^2.15.3"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
+}
