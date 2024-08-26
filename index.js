@@ -13,18 +13,26 @@ const main = async () => {
   for (const file of files) {
     if (file.isFile()) {
       const module = await import(file.parentPath + "/" + file.name);
-      const name = path.parse(file.name);
-      methods[name.name] = module;
+      const name = path.parse(file.name).name;
+      for (const [key, value] of Object.entries(module)) {
+        methods[name + "." + key] = value;
+      }
     }
   }
-  console.log(methods);
 };
 
 await main();
 
 app.post("/rpc", (req, res) => {
-  console.log(req.body);
-  res.send("response body");
+  const method = req.body.method;
+  const params = req.body.params;
+
+  if (method && Object.hasOwn(methods, method)) {
+    const result = methods[method](...params);
+    res.send(result);
+  } else {
+    res.status(400).send();
+  }
 });
 
 app.listen(3000);

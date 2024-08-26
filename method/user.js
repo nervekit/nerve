@@ -1,3 +1,3 @@
 export function create(email, password) {
-    console.log("creating user:", email, password);
+  return { user: { email: email, password: password } };
 }
