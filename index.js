@@ -1,50 +1,21 @@
 import Ajv from "ajv";
+import addFormats from "ajv-formats";
 import express from "express";
-import fs from "node:fs/promises";
-import path from "node:path";
+import { load } from "./lib.js";
+
+const methods = await load("./methods");
+const schemas = await load("./schemas");
 
 const ajv = new Ajv();
+addFormats(ajv);
+
 const app = express();
 app.use(express.json());
 
-const methods = {};
-const schemas = {};
-
-const loadMethods = async () => {
-  const files = await fs.readdir("./method", { withFileTypes: true });
-
-  for (const file of files) {
-    if (file.isFile()) {
-      const module = await import(file.parentPath + "/" + file.name);
-      const name = path.parse(file.name).name;
-      for (const [key, value] of Object.entries(module)) {
-        methods[name + "." + key] = value;
-      }
-    }
-  }
-};
-
-const loadSchemas = async () => {
-  const files = await fs.readdir("./schema", { withFileTypes: true });
-
-  for (const file of files) {
-    if (file.isFile()) {
-      const module = await import(file.parentPath + "/" + file.name);
-      const name = path.parse(file.name).name;
-      for (const [key, value] of Object.entries(module)) {
-        schemas[name + "." + key] = value;
-      }
-    }
-  }
-};
-
-await loadMethods();
-await loadSchemas();
-
 app.post("/rpc", async (req, res) => {
   const method = req.body.method;
-  const paramsSchema = schemas[method] ? schemas[method] : { type: "array" };
 
+  const paramsSchema = schemas[method] ? schemas[method] : { type: "array" };
   const schema = {
     type: "object",
     properties: {
