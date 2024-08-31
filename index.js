@@ -2,6 +2,7 @@ import Ajv from "ajv";
 import addFormats from "ajv-formats";
 import express from "express";
 import { load } from "./lib.js";
+import "./db.js";
 
 const methods = await load("./methods");
 const schemas = await load("./schemas");
