@@ -1,5 +1,5 @@
 {
-  "name": "velocity",
+  "name": "nerve",
   "version": "0.1.0",
   "description": "Rapid development full stack web framework",
   "main": "index.js",
@@ -7,13 +7,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "github:rbwsam/velocity",
+  "repository": "github:nervekit/nerve",
   "author": "Sam Leavens",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rbwsam/velocity/issues"
+    "url": "https://github.com/nervekit/nerve/issues"
   },
-  "homepage": "https://github.com/rbwsam/velocity#readme",
+  "homepage": "https://github.com/nervekit/nerve#readme",
   "devDependencies": {
     "prettier": "^3.3.3"
   },
