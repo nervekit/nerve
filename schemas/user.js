@@ -7,3 +7,5 @@ export const create = {
   minItems: 2,
   maxItems: 2,
 };
+
+export const login = create;

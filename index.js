@@ -32,7 +32,7 @@ const sendResult = (res, result = {}) => {
 };
 
 app.post("/rpc", async (req, res) => {
-  const method = req.body.method;
+  const { method, params } = req.body;
   const paramsSchema = schemas[method] ? schemas[method] : { type: "array" };
   const schema = {
     type: "object",
@@ -52,7 +52,7 @@ app.post("/rpc", async (req, res) => {
   }
 
   try {
-    const result = await methods[method](...req.body.params);
+    const result = await methods[method](...params);
     sendResult(res, result);
   } catch (err) {
     if (err instanceof MethodError) {
