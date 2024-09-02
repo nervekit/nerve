@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { secureToken } from "../lib.js";
 
 export const TokenScope = {
   SESSION: "session",
@@ -14,7 +15,6 @@ const schema = new mongoose.Schema({
   },
   token: {
     type: String,
-    required: true,
     unique: true,
   },
   user: {
@@ -27,6 +27,12 @@ const schema = new mongoose.Schema({
     required: true,
     expires: 0,
   },
+});
+
+schema.pre("save", async function () {
+  if (!this.token) {
+    this.token = await secureToken();
+  }
 });
 
 export const Token = mongoose.model("Token", schema);
