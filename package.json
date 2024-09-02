@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "github:nervekit/nerve",
@@ -15,14 +16,17 @@
   },
   "homepage": "https://github.com/nervekit/nerve#readme",
   "devDependencies": {
+    "nodemon": "^3.1.4",
     "prettier": "^3.3.3"
   },
   "dependencies": {
+    "@koa/bodyparser": "^5.1.1",
+    "@koa/router": "^13.0.0",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
     "argon2": "^0.41.1",
-    "express": "^4.19.2",
     "jsonschema": "^1.4.1",
+    "koa": "^2.15.3",
     "mongoose": "^8.6.0"
   }
 }

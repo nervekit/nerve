@@ -1,6 +1,6 @@
 import argon2 from "argon2";
 import { MethodError } from "../errors.js";
-import { addSeconds, secureToken } from "../lib.js";
+import { addSeconds } from "../lib.js";
 import { Token, TokenScope } from "../models/token.js";
 import { User } from "../models/user.js";
 
@@ -26,7 +26,6 @@ export const login = async (email, password) => {
       user: user,
       expiration: addSeconds(new Date(), 3600),
     });
-
     return { token: document.token };
   }
   throw new MethodError(INVALID_LOGIN);
