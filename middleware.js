@@ -33,7 +33,7 @@ export function validateRPC() {
     if (valid) {
       await next();
     } else {
-      ctx.status = 400;
+      ctx.status = 200;
       ctx.body = {
         error: {
           message: "Invalid Request",

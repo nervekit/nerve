@@ -16,7 +16,7 @@ router.post("/rpc", validateRPC(), async (ctx) => {
     };
   } catch (err) {
     if (err instanceof MethodError) {
-      ctx.status = 400;
+      ctx.status = 200;
       ctx.body = {
         error: {
           message: err.message,
