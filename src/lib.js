@@ -22,7 +22,12 @@ export const load = async (dir) => {
   const files = await fs.readdir(dir, { withFileTypes: true });
   for (const file of files) {
     if (file.isFile()) {
-      const module = await import(file.parentPath + "/" + file.name);
+      const modulePath = path.resolve(
+        process.cwd(),
+        file.parentPath,
+        file.name,
+      );
+      const module = await import(modulePath);
       const name = path.parse(file.name).name;
       for (const [key, value] of Object.entries(module)) {
         modules[name + "." + key] = value;

@@ -4,7 +4,7 @@ import { load } from "./lib.js";
 import { validateRPC } from "./middleware.js";
 
 export const router = new Router();
-const methods = await load("./methods");
+const methods = await load("./src/methods");
 
 router.post("/rpc", validateRPC(), async (ctx) => {
   const { method, params } = ctx.request.body;

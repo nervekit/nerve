@@ -15,6 +15,12 @@ export const create = async (email, password) => {
   await User.create({ email: email, password: hashed });
 };
 
+export const forgotPassword = async (email) => {
+  // find the user
+  // generate a password reset token
+  // send email to the user including the token
+};
+
 export const login = async (email, password) => {
   const user = await User.findOne({ email: email }).exec();
   if (!user) {

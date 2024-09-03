@@ -13,8 +13,8 @@ export function logger(format) {
 
 export function validateRPC() {
   return async function (ctx, next) {
-    const methods = await load("./methods");
-    const schemas = await load("./schemas");
+    const methods = await load("./src/methods");
+    const schemas = await load("./src/schemas");
     const { method } = ctx.request.body;
     const paramsSchema = schemas[method] ? schemas[method] : { type: "array" };
     const schema = {
