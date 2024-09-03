@@ -23,3 +23,13 @@ export const logout = {
   minItems: 1,
   maxItems: 1,
 };
+
+export const resetPassword = {
+  type: "array",
+  items: [
+    { type: "string", minLength: 8, maxLength: 64 },
+    { type: "string", minLength: 8, maxLength: 64 },
+  ],
+  minItems: 2,
+  maxItems: 2,
+};
