@@ -30,3 +30,7 @@ export const login = async (email, password) => {
   }
   throw new MethodError(INVALID_LOGIN);
 };
+
+export const logout = async (token) => {
+  await Token.findOneAndDelete({ token: token });
+};
