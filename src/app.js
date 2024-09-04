@@ -1,6 +1,6 @@
 import { bodyParser } from "@koa/bodyparser";
 import Koa from "koa";
-import { logger } from "./middleware.js";
+import { logger } from "./middleware/logger.js";
 import "./db.js";
 import { router } from "./router.js";
 
