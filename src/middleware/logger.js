@@ -1,8 +1,10 @@
-export function logger(format) {
+import { log } from "../log.js";
+
+export function logger() {
   return async function logger(ctx, next) {
     const start = Date.now();
     await next();
     const ms = Date.now() - start;
-    console.log(`${ctx.status} ${ctx.method} ${ctx.url} - ${ms}ms`);
+    log.info(`${ctx.status} ${ctx.method} ${ctx.url} - ${ms}ms`);
   };
 }

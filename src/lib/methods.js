@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { moduleDir } from "./path.js";
+import { log } from "../log.js";
 
 const methods = {};
 const kitPath = path.resolve(moduleDir(import.meta.url), "../methods");
@@ -33,7 +34,7 @@ const cacheApp = async () => {
     await cache(appPath);
   } catch (err) {
     if (err.code === "ENOENT" && err.path === appPath) {
-      console.log("no app methods found");
+      log.debug(`Directory "${appPath}" does not exist. App has no methods.`);
     } else {
       throw err;
     }
