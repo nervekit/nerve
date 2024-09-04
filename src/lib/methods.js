@@ -34,7 +34,7 @@ const cacheApp = async () => {
     await cache(path_);
   } catch (err) {
     if (err.code === "ENOENT" && err.path === path_) {
-      log.debug(`Directory "${path_}" does not exist. App has no methods.`);
+      log.debug(`"${path_}" does not exist. App has no methods.`);
     } else {
       throw err;
     }
