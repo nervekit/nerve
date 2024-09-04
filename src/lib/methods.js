@@ -4,8 +4,6 @@ import { moduleDir } from "./path.js";
 import { log } from "../log.js";
 
 const methods = {};
-const kitPath = path.resolve(moduleDir(import.meta.url), "../methods");
-const appPath = "./src/methods";
 
 const readDir = async (path, filter) => {
   const files = await fs.readdir(path, { withFileTypes: true });
@@ -26,15 +24,17 @@ const cache = async (dir) => {
 };
 
 const cacheKit = async () => {
-  await cache(kitPath);
+  const path_ = path.resolve(moduleDir(import.meta.url), "../methods");
+  await cache(path_);
 };
 
 const cacheApp = async () => {
+  const path_ = "./src/methods";
   try {
-    await cache(appPath);
+    await cache(path_);
   } catch (err) {
-    if (err.code === "ENOENT" && err.path === appPath) {
-      log.debug(`Directory "${appPath}" does not exist. App has no methods.`);
+    if (err.code === "ENOENT" && err.path === path_) {
+      log.debug(`Directory "${path_}" does not exist. App has no methods.`);
     } else {
       throw err;
     }
