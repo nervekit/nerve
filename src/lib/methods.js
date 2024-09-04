@@ -3,6 +3,8 @@ import path from "node:path";
 import { moduleDir } from "./path.js";
 
 const methods = {};
+const kitPath = path.resolve(moduleDir(import.meta.url), "../methods");
+const appPath = "./src/methods";
 
 const readDir = async (path, filter) => {
   const files = await fs.readdir(path, { withFileTypes: true });
@@ -22,9 +24,26 @@ const cache = async (dir) => {
   }
 };
 
+const cacheKit = async () => {
+  await cache(kitPath);
+};
+
+const cacheApp = async () => {
+  try {
+    await cache(appPath);
+  } catch (err) {
+    if (err.code === "ENOENT" && err.path === appPath) {
+      console.log("no app methods found");
+    } else {
+      throw err;
+    }
+  }
+};
+
 export const load = async () => {
   if (Object.keys(methods).length === 0) {
-    await cache(path.resolve(moduleDir(import.meta.url), "../methods"));
+    await cacheKit();
+    await cacheApp();
   }
   return methods;
 };
