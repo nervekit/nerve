@@ -1,6 +1,6 @@
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
-import { load } from "./lib.js";
+import { loadMethods } from "./lib.js";
 
 export function logger(format) {
   return async function logger(ctx, next) {
@@ -13,15 +13,13 @@ export function logger(format) {
 
 export function validateRPC() {
   return async function (ctx, next) {
-    const methods = await load("./src/methods");
-    const schemas = await load("./src/schemas");
+    const methods = await loadMethods();
     const { method } = ctx.request.body;
-    const paramsSchema = schemas[method] ? schemas[method] : { type: "array" };
     const schema = {
       type: "object",
       properties: {
         method: { enum: Object.keys(methods) },
-        params: paramsSchema,
+        params: methods[method].schema,
       },
       required: ["method", "params"],
       additionalProperties: false,
