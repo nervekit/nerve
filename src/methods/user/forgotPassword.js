@@ -1,5 +1,5 @@
 import { send } from "../../email.js";
-import { addSeconds } from "../../lib.js";
+import { addSeconds } from "../../lib/date.js";
 import { Token, TokenScope } from "../../models/token.js";
 import { User } from "../../models/user.js";
 

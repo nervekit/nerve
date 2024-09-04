@@ -1,11 +1,11 @@
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
-import { loadMethods } from "../lib.js";
+import { load } from "../lib/methods.js";
 
 const ajv = new Ajv();
 addFormats(ajv);
 
-const methods = await loadMethods();
+const methods = await load();
 
 const primarySchema = {
   type: "object",

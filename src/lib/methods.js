@@ -1,19 +1,16 @@
-import crypto from "crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
-import { promisify } from "util";
+import { moduleDir } from "./path.js";
 
 const methods = {};
-
-const randomBytes = promisify(crypto.randomBytes);
 
 const readDir = async (path, filter) => {
   const files = await fs.readdir(path, { withFileTypes: true });
   return files.filter(filter);
 };
 
-const cacheMethods = async () => {
-  const dirs = await readDir("./src/methods", (f) => f.isDirectory());
+const cache = async (dir) => {
+  const dirs = await readDir(dir, (f) => f.isDirectory());
   for (const d of dirs) {
     const p = path.resolve(d.parentPath, d.name);
     const files = await readDir(p, (f) => f.isFile());
@@ -25,20 +22,9 @@ const cacheMethods = async () => {
   }
 };
 
-// Add the given number of seconds to a Date (returns new instance of Date).
-export const addSeconds = (date, seconds) => {
-  return new Date(date.getTime() + 1000 * seconds);
-};
-
-// Generate a URL safe secure token.
-export const secureToken = async () => {
-  const token = await randomBytes(32);
-  return token.toString("base64url");
-};
-
-export const loadMethods = async () => {
+export const load = async () => {
   if (Object.keys(methods).length === 0) {
-    await cacheMethods();
+    await cache(path.resolve(moduleDir(import.meta.url), "../methods"));
   }
   return methods;
 };
