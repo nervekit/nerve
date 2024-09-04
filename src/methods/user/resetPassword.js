@@ -3,18 +3,18 @@ import { MethodError, ErrorMessage } from "../../errors.js";
 import argon2 from "argon2";
 
 export default async (token, password) => {
-  const tokenDocument = await Token.findOne({
+  const doc = await Token.findOne({
     scope: TokenScope.PASSWORD_RESET,
     token: token,
   }).populate("user");
 
-  if (!tokenDocument) {
+  if (!doc) {
     throw new MethodError(ErrorMessage.INVALID_TOKEN);
   }
 
-  tokenDocument.user.password = await argon2.hash(password);
-  await tokenDocument.user.save();
-  await Token.deleteOne({ token: token });
+  doc.user.password = await argon2.hash(password);
+  await doc.user.save();
+  await doc.deleteOne();
 };
 
 export const schema = {

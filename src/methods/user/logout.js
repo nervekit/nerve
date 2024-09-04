@@ -1,10 +1,15 @@
+import { ErrorMessage, MethodError } from "../../errors.js";
 import { Token, TokenScope } from "../../models/token.js";
 
 export default async (token) => {
-  await Token.findOneAndDelete({
+  const doc = await Token.findOne({
     scope: TokenScope.SESSION,
     token: token,
   });
+  if (!doc) {
+    throw new MethodError(ErrorMessage.INVALID_TOKEN);
+  }
+  await doc.deleteOne();
 };
 
 export const schema = {
