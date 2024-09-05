@@ -1,10 +1,9 @@
 import Router from "@koa/router";
 import { MethodError } from "./errors.js";
-import { load } from "./lib/methods.js";
 import { rpc } from "./middleware/rpc.js";
+import { methods } from "./methods.js";
 
 export const router = new Router();
-const methods = await load();
 
 router.post("/rpc", rpc(), async (ctx) => {
   const { method, params } = ctx.request.body;

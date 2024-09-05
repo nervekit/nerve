@@ -1,21 +1,9 @@
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
-import { load } from "../lib/methods.js";
+import { methods } from "../methods.js";
 
 const ajv = new Ajv();
 addFormats(ajv);
-
-const methods = await load();
-
-const primarySchema = {
-  type: "object",
-  properties: {
-    method: { enum: Object.keys(methods) },
-    params: { type: "array" },
-  },
-  required: ["method", "params"],
-  additionalProperties: false,
-};
 
 const errorResponse = (ctx, errors) => {
   ctx.status = 200;
@@ -27,14 +15,26 @@ const errorResponse = (ctx, errors) => {
   };
 };
 
+const primarySchema = () => {
+  return {
+    type: "object",
+    properties: {
+      method: { enum: Object.keys(methods) },
+      params: { type: "array" },
+    },
+    required: ["method", "params"],
+    additionalProperties: false,
+  };
+};
+
 const primary = async (body) => {
-  const validate = ajv.compile(primarySchema);
+  const validate = ajv.compile(primarySchema());
   validate(body);
   return validate.errors;
 };
 
 const secondary = async (body) => {
-  const schema = { ...primarySchema };
+  const schema = { ...primarySchema() };
   schema.properties.params = methods[body.method]["schema"];
   const validate = ajv.compile(schema);
   validate(body);
