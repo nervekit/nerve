@@ -7,7 +7,8 @@ export const TokenScope = {
   EMAIL_VERIFY: "email_verify",
 };
 
-const schema = new mongoose.Schema({
+export const name = "Token";
+export const schema = new mongoose.Schema({
   scope: {
     type: String,
     required: true,
@@ -34,5 +35,3 @@ schema.pre("save", async function () {
     this.token = await secureToken();
   }
 });
-
-export const Token = mongoose.model("Token", schema);

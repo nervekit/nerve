@@ -43,7 +43,7 @@ const cacheApp = async () => {
 
 export const load = async () => {
   if (Object.keys(methods).length === 0) {
-    await cacheKit();
+    // await cacheKit();
     await cacheApp();
   }
   return methods;
