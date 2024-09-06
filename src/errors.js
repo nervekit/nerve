@@ -2,6 +2,7 @@ export const ErrorMessage = {
   EMAIL_EXISTS: "User already exists with email.",
   INVALID_LOGIN: "Invalid email or password.",
   INVALID_TOKEN: "Invalid token.",
+  NOT_FOUND: "Not found.",
 };
 
 export class MethodError extends Error {
