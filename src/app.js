@@ -4,9 +4,11 @@ import { logger } from "./middleware/logger.js";
 import { router } from "./router.js";
 import "./db.js";
 import { addMethods } from "./methods.js";
+import { modulePath } from "./modules.js";
 
 export const init = async () => {
   await addMethods("./src/methods");
+  await addMethods(modulePath(import.meta.url, "methods"));
 
   const app = new Koa();
   app.use(logger());
