@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { secureToken } from "../lib/token.js";
+import { secureToken } from "../token.js";
 import { db } from "../db.js";
 
 export const TokenScope = {

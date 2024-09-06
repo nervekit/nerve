@@ -1,6 +1,6 @@
 import argon2 from "argon2";
 import { MethodError, ErrorMessage } from "../../errors.js";
-import { addSeconds } from "../../lib/date.js";
+import { addSeconds } from "../../date.js";
 import { Token, TokenScope } from "../../models/token.js";
 import { User } from "../../models/user.js";
 
