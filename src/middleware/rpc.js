@@ -43,8 +43,6 @@ const secondary = async (body) => {
 
 export function rpc() {
   return async function (ctx, next) {
-    console.log(ctx.request.body);
-
     for (const check of [primary, secondary]) {
       const errors = await check(ctx.request.body);
       if (errors) {
