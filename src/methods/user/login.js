@@ -18,4 +18,4 @@ export default async (email, password) => {
   return { token: token.token };
 };
 
-export { schema } from "./create.js";
+export { schema } from "./register.js";

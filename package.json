@@ -25,6 +25,8 @@
     "argon2": "^0.41.1",
     "jsonschema": "^1.4.1",
     "koa": "^2.15.3",
+    "koa-mount": "^4.0.0",
+    "koa-static": "^5.0.0",
     "mongoose": "^8.6.0",
     "nodemailer": "^6.9.15",
     "winston": "^3.14.2"

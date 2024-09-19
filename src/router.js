@@ -1,7 +1,7 @@
 import Router from "@koa/router";
 import { MethodError } from "./errors.js";
-import { rpc } from "./middleware/rpc.js";
 import { methods } from "./methods.js";
+import { rpc } from "./middleware/rpc.js";
 
 export const router = new Router();
 
